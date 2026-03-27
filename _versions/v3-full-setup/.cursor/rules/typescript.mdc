@@ -1,0 +1,14 @@
+---
+description: TypeScript conventions for this project
+globs: ["src/**/*.ts", "src/**/*.tsx"]
+---
+
+# TypeScript Rules
+
+- Strict mode: no `any`, no `as` casts unless absolutely necessary
+- Use `interface` for object shapes, `type` for unions/intersections
+- All component props must have a dedicated `ComponentNameProps` interface
+- Import types with `import type { X }` to avoid runtime imports
+- Use `noUncheckedIndexedAccess` — always handle potential `undefined`
+- Prefer `const` assertions for literal objects
+- Generic types: use descriptive names, not single letters (e.g., `TData` not `T`)

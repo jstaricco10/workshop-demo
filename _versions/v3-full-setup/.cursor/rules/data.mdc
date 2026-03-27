@@ -1,0 +1,12 @@
+---
+description: Data and mock conventions
+globs: ["src/data/**/*.ts", "src/types/**/*.ts"]
+---
+
+# Data Rules
+
+- All interfaces in src/types/ with descriptive filenames
+- Mock data in src/data/mockData.ts as named exports
+- Every mock array/object must be typed with its interface
+- Use realistic but fictional data (Latin American names, plausible numbers)
+- Dates as ISO strings, numbers without formatting (format in components)

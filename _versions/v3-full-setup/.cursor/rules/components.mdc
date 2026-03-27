@@ -1,0 +1,15 @@
+---
+description: React component conventions
+globs: ["src/components/**/*.tsx"]
+---
+
+# Component Rules
+
+- One component per file, named export only
+- Props interface defined above the component in the same file
+- Max 80 lines per component — extract helpers/sub-components
+- No direct data imports — receive everything via props
+- Use Lucide React for icons, import individually (not `import * as`)
+- Tailwind only: rounded-xl cards, shadow-sm default, hover:shadow-md interactive
+- Color palette: blue-500/600, emerald-500, red-500, gray-{50,100,400,500,900}
+- Always add transition classes for hover effects

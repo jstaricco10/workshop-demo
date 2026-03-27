@@ -1,0 +1,39 @@
+# Dev Dashboard — Project Rules
+
+## Project Overview
+React 18 dashboard for engineering team metrics. Vite + TypeScript + Tailwind CSS.
+
+## Tech Stack
+- React 18 with functional components and hooks
+- TypeScript (strict mode) — no `any` types, ever
+- Tailwind CSS for all styling — no inline styles, no CSS modules
+- Recharts for data visualization
+- Lucide React for icons
+
+## Architecture
+- `src/components/` — one component per file, named export, PascalCase filename
+- `src/types/` — shared TypeScript interfaces, suffix with descriptive name (e.g., `dashboard.ts`)
+- `src/data/` — mock data and constants, typed with interfaces from `types/`
+- All components receive data via props — no direct data imports inside components
+
+## Component Patterns
+- Always use named exports: `export function ComponentName()`
+- Define a `ComponentNameProps` interface for every component's props
+- Use Tailwind utility classes exclusively — prefer `gap-*` over margins between siblings
+- Rounded corners: `rounded-xl` for cards, `rounded-lg` for inner elements, `rounded-full` for avatars
+- Shadows: `shadow-sm` default, `hover:shadow-md` for interactive cards
+- Color palette: blue-500/600 primary, emerald-500 success, red-500 error, gray-50/100/400/500/900 for neutrals
+- Use `transition-*` classes for hover/state changes
+- Keep components under 80 lines — extract sub-components if longer
+
+## Data & Types
+- Every data structure must have a TypeScript interface in `src/types/`
+- Mock data goes in `src/data/mockData.ts`, exported as named constants
+- Use descriptive property names, not abbreviations
+
+## When Adding New Features
+- Create new types first in `src/types/`
+- Add mock data in `src/data/mockData.ts`
+- Create component(s) in `src/components/`
+- Wire into `App.tsx` — follow existing grid layout patterns
+- New metric cards should reuse the `MetricCard` component

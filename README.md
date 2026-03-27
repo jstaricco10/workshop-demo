@@ -38,6 +38,30 @@ src/
 
 ---
 
+## 🚀 Quick Setup for Presenters
+
+### Automated Setup (Recommended)
+
+Run this script to create 4 separate project directories, one for each version:
+
+```bash
+./setup-workshop.sh
+```
+
+This creates:
+- `workshop-demo-v1/` - Zero config
+- `workshop-demo-v2/` - Rules only
+- `workshop-demo-v3/` - Commands
+- `workshop-demo-v4/` - Skills
+
+Then open 4 terminal tabs, one in each directory. You're ready to present!
+
+**Full instructions:** See [`PRESENTATION-SETUP.md`](./PRESENTATION-SETUP.md)
+
+**Quick reference during presentation:** See [`QUICK-REFERENCE.md`](./QUICK-REFERENCE.md)
+
+---
+
 ## 🎯 Workshop Demo Guide
 
 ### The Prompt (same for all versions):

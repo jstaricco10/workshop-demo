@@ -40,7 +40,7 @@ src/
 
 ## 🎯 Workshop Demo Guide
 
-### The Prompt (same for all 3 versions):
+### The Prompt (same for all versions):
 
 ```
 Add a new "Deployment History" section to the dashboard that shows:
@@ -87,24 +87,74 @@ Add a new "Deployment History" section to the dashboard that shows:
    - Commands provide repeatable workflows
    - Quality is consistently higher
 
+### Version 4: Skills (Claude Code) ⭐
+1. Copy `_versions/v4-skills/.claude/` to project root
+2. Copy `_versions/v4-skills/CLAUDE.md` to project root
+3. Undo V3 changes (git reset --hard HEAD)
+4. Simply run: `/workshop`
+5. **Things to point out to audience:**
+   - Fully autonomous execution - no manual steps
+   - Creates types → data → components → integration automatically
+   - Self-validates with built-in `/review`
+   - Shows complete summary with all changes
+   - Perfect adherence to all conventions
+   - **This is the killer demo** - AI coding autonomously with quality
+
 ### Comparison Points (for presentation)
 
-| Aspect | V1 Zero Config | V2 Rules | V3 Full Setup |
-|--------|---------------|----------|---------------|
-| File structure | Unpredictable | Follows conventions | Follows conventions |
-| TypeScript | Loose, maybe `any` | Strict, typed | Strict, typed |
-| Styling | Mixed approaches | Tailwind + palette | Tailwind + palette |
-| Workflow order | Random | Better but unguided | Types → Data → Component → Wire |
-| Quality gate | None | Implicit | Explicit (/review) |
-| Reusability | One-off | Consistent | Consistent + repeatable |
+| Aspect | V1 Zero Config | V2 Rules | V3 Commands | V4 Skills |
+|--------|---------------|----------|-------------|-----------|
+| File structure | Unpredictable | Follows conventions | Follows conventions | Follows conventions |
+| TypeScript | Loose, maybe `any` | Strict, typed | Strict, typed | Strict, typed |
+| Styling | Mixed approaches | Tailwind + palette | Tailwind + palette | Tailwind + palette |
+| Workflow order | Random | Better but unguided | Guided step-by-step | Fully automated |
+| Quality gate | None | Implicit | Manual checklist | Auto-review + auto-fix |
+| User intervention | Constant | Frequent | Each step | Minimal (approve once) |
+| Intelligence | Basic | Pattern-matching | Guided | Autonomous |
+| Reusability | One-off | Consistent | Repeatable workflow | Intelligent automation |
+| Demo impact | "AI is inconsistent" | "AI can follow rules" | "AI can be guided" | "AI can work autonomously" |
 
 ---
 
 ## Tips for Live Demo
 
-1. **Git init the project** before starting so you can `git diff` and `git checkout .` between versions
-2. **Have 3 terminal tabs** ready: one per version
+1. **Git init the project** before starting so you can `git diff` and `git reset --hard` between versions
+2. **Have 4 terminal tabs** ready: one per version
 3. **Time each run** — even roughly ("that took about 20 seconds")
 4. **Show the diff** between versions to highlight structural differences
 5. **If something goes wrong** in V1, that's actually great — it proves the point
-6. **End with /review** on V3 to show the command workflow in action
+6. **Build the narrative**:
+   - V1: "Without config, AI is unpredictable"
+   - V2: "With rules, AI becomes consistent"
+   - V3: "With commands, AI follows workflows"
+   - V4: "With skills, AI works autonomously" ⭐
+7. **Save V4 for last** - it's the most impressive. Let the audience see the progression
+8. **For V4**: Just run `/workshop` and let it execute. Show the summary at the end
+9. **Optional**: Run `/review` after each version to show quality differences
+
+## Workshop Flow Suggestion
+
+### Act 1: The Problem (V1)
+"Let's see what happens without any configuration..."
+- Run prompt, show inconsistent output
+- Point out issues: wrong exports, inline styles, etc.
+
+### Act 2: Rules Help (V2)
+"Now let's add some rules..."
+- Show improved consistency
+- But still no workflow guidance
+
+### Act 3: Commands Guide (V3)
+"Commands provide step-by-step workflows..."
+- Show interactive `/feature` command
+- Demonstrate `/review` checklist
+- Good, but requires user input at each step
+
+### Act 4: Skills Automate (V4) 🎬
+"What if AI could do all of this autonomously?"
+- Simply run `/workshop`
+- Let it execute completely
+- Show the perfect result
+- **Mic drop moment** 🎤
+
+**Key message**: Configuration isn't just about rules - it's about creating intelligent, autonomous AI teammates.

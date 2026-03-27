@@ -110,9 +110,10 @@ import type { DevMetric } from '@/types/dashboard'
 
 ## Workshop Demo Context
 
-This project exists in three configuration versions (in `_versions/`):
+This project exists in four configuration versions (in `_versions/`):
 1. **v1-zero-config**: No AI configuration (demonstrates inconsistent output)
 2. **v2-rules-only**: `.cursorrules` file (demonstrates improved consistency)
-3. **v3-full-setup**: Full setup with modular rules + commands (demonstrates optimal workflow)
+3. **v3-full-setup**: Full setup with modular rules + commands (demonstrates guided workflows)
+4. **v4-skills**: Claude Code skills for intelligent, autonomous execution (demonstrates AI automation)
 
-The same prompt is used across all three versions to show how configuration impacts code quality, structure, and adherence to conventions. Understanding this context helps when reviewing or extending the demo.
+The same prompt is used across all versions to show the evolution from unpredictable → consistent → guided → autonomous. Each version builds on the previous, demonstrating how AI configuration transforms development workflows.

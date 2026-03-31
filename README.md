@@ -40,25 +40,43 @@ src/
 
 ## 🚀 Quick Setup for Presenters
 
-### Automated Setup (Recommended)
+### ⚡ Simplified Setup (Recommended - 2 Versions)
 
-Run this script to create 4 separate project directories, one for each version:
+**Best for focused presentations showing dramatic contrast:**
+
+```bash
+./setup-workshop-simple.sh
+```
+
+This creates:
+- `workshop-demo-zero-config/` - Sin configuración (port 3001)
+- `workshop-demo-full-stack/` - Configuración completa con skills (port 3004)
+
+**Time: 25-30 minutes** | **Impact: Maximum** 🎯
+
+See [`PRESENTATION-SIMPLE.md`](./PRESENTATION-SIMPLE.md) for the full guide.
+See [`QUICK-REFERENCE-SIMPLE.md`](./QUICK-REFERENCE-SIMPLE.md) during your talk.
+
+---
+
+### 📚 Full Setup (All 4 Versions)
+
+**Best for workshops teaching the progression:**
 
 ```bash
 ./setup-workshop.sh
 ```
 
-This creates:
+This creates all 4 versions:
 - `workshop-demo-v1/` - Zero config
 - `workshop-demo-v2/` - Rules only
 - `workshop-demo-v3/` - Commands
 - `workshop-demo-v4/` - Skills
 
-Then open 4 terminal tabs, one in each directory. You're ready to present!
+**Time: 40-50 minutes** | **Shows full evolution**
 
-**Full instructions:** See [`PRESENTATION-SETUP.md`](./PRESENTATION-SETUP.md)
-
-**Quick reference during presentation:** See [`QUICK-REFERENCE.md`](./QUICK-REFERENCE.md)
+See [`PRESENTATION-SETUP.md`](./PRESENTATION-SETUP.md) for the full guide.
+See [`QUICK-REFERENCE.md`](./QUICK-REFERENCE.md) during your talk
 
 ---
 

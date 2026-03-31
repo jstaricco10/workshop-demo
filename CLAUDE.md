@@ -116,4 +116,6 @@ This project exists in four configuration versions (in `_versions/`):
 3. **v3-full-setup**: Full setup with modular rules + commands (demonstrates guided workflows)
 4. **v4-skills**: Claude Code skills for intelligent, autonomous execution (demonstrates AI automation)
 
-The same prompt is used across all versions to show the evolution from unpredictable → consistent → guided → autonomous. Each version builds on the previous, demonstrating how AI configuration transforms development workflows.
+The same prompt is used across all versions to show the evolution from unpredictable → consistent → guided → autonomous.
+
+**For presentations:** Most impactful is comparing V1 (zero config) vs V4 (full stack) to show dramatic contrast. See `PRESENTATION-SIMPLE.md` for the streamlined 25-minute demo format.

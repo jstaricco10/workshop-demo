@@ -28,6 +28,19 @@ cp -r "$BASE_DIR" workshop-demo-zero-config
 cd workshop-demo-zero-config
 rm -rf .git .cursorrules .cursor .claude CLAUDE.md package-lock.json 2>/dev/null || true
 rm -rf _versions 2>/dev/null || true  # Remove versions to keep it clean
+# Create settings to disable global skills and memory
+mkdir -p .claude
+cat > .claude/settings.local.json << 'EOF'
+{
+  "skills": {
+    "disableGlobal": true
+  },
+  "memory": {
+    "enabled": false
+  }
+}
+EOF
+echo "  📝 Created settings.local.json (skills disabled, memory disabled)"
 # Set port to 3001
 sed -i '' 's/port: 3003/port: 3001/' vite.config.ts
 echo "  📦 Installing dependencies..."

@@ -6,8 +6,8 @@ A simple React dashboard used to demonstrate the impact of AI configuration leve
 ## Quick Start
 
 ```bash
-npm install
-npm run dev
+yarn install
+yarn dev
 ```
 
 Open http://localhost:3003

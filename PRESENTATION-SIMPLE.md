@@ -48,7 +48,7 @@ cd ~/Desktop/workshop-demo-full-stack
 **Show the dashboard base:**
 ```bash
 # Tab 1
-npm run dev  # http://localhost:3001
+yarn dev  # http://localhost:3001
 ```
 
 Show the browser: "Este es nuestro dashboard. Vamos a agregar una feature de Deployment History."
@@ -118,7 +118,7 @@ cat src/data/mockData.ts
 
 **Optional - run it to show visually:**
 ```bash
-npm run dev  # http://localhost:3001
+yarn dev  # http://localhost:3001
 ```
 
 Show in browser: "Funciona... pero mira el código."
@@ -207,7 +207,7 @@ cat src/components/DeploymentHistory.tsx | head -40
 
 **Run it to show visually:**
 ```bash
-npm run dev  # http://localhost:3004
+yarn dev  # http://localhost:3004
 ```
 
 Open browser:
@@ -281,7 +281,7 @@ Open browser:
 - [ ] 2 directories created (zero-config, full-stack)
 - [ ] 2 terminal tabs open in each directory
 - [ ] Both `npm install` completed successfully
-- [ ] Verified `npm run dev` works in both
+- [ ] Verified `yarn dev` works in both
 - [ ] Prompt copied and ready
 - [ ] Claude Code working and authenticated
 - [ ] Internet stable

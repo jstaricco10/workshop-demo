@@ -6,6 +6,7 @@
 set -e  # Exit on error
 
 echo "🎬 Setting up Workshop Demo environments (V1 vs V4)..."
+echo "⚠️  Note: This script requires yarn to be installed"
 echo ""
 
 BASE_DIR="workshop-demo"
@@ -25,11 +26,12 @@ cd "$PARENT_DIR"
 rm -rf workshop-demo-zero-config
 cp -r "$BASE_DIR" workshop-demo-zero-config
 cd workshop-demo-zero-config
-rm -rf .cursorrules .cursor .claude CLAUDE.md 2>/dev/null || true
+rm -rf .git .cursorrules .cursor .claude CLAUDE.md package-lock.json 2>/dev/null || true
 rm -rf _versions 2>/dev/null || true  # Remove versions to keep it clean
 # Set port to 3001
 sed -i '' 's/port: 3003/port: 3001/' vite.config.ts
-npm install > /dev/null 2>&1
+echo "  📦 Installing dependencies..."
+yarn install > /dev/null 2>&1
 echo "  ✅ zero-config ready (port 3001)"
 
 # Full Stack (Skills + Rules + Commands)
@@ -38,7 +40,7 @@ cd "$PARENT_DIR"
 rm -rf workshop-demo-full-stack
 cp -r "$BASE_DIR" workshop-demo-full-stack
 cd workshop-demo-full-stack
-rm -rf .cursorrules .cursor 2>/dev/null || true
+rm -rf .git .cursorrules .cursor package-lock.json 2>/dev/null || true
 # Copy config BEFORE removing _versions
 if [ -d "_versions/v4-skills" ]; then
   cp _versions/v4-skills/CLAUDE.md . 2>/dev/null || true
@@ -50,7 +52,8 @@ fi
 rm -rf _versions 2>/dev/null || true  # Remove versions to keep it clean
 # Set port to 3004
 sed -i '' 's/port: 3003/port: 3004/' vite.config.ts
-npm install > /dev/null 2>&1
+echo "  📦 Installing dependencies..."
+yarn install > /dev/null 2>&1
 echo "  ✅ full-stack ready (port 3004)"
 
 cd "$PARENT_DIR"

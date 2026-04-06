@@ -9,10 +9,10 @@ Workshop demo React dashboard that demonstrates the impact of AI configuration l
 ## Development Commands
 
 ```bash
-npm install          # Install dependencies
-npm run dev          # Start dev server (http://localhost:3003)
-npm run build        # Type-check and build for production
-npm run preview      # Preview production build
+yarn install         # Install dependencies
+yarn dev             # Start dev server (http://localhost:3003)
+yarn build           # Type-check and build for production
+yarn preview         # Preview production build
 ```
 
 ## Tech Stack

@@ -20,8 +20,12 @@ src/
   types/dashboard.ts      # ALL interfaces here
   data/mockData.ts        # ALL mock data here
   components/             # One component per file
-  App.tsx                 # Main layout
+  App.tsx                 # Main layout, imports all data
 ```
+
+**Path alias:** `@/*` maps to `src/*` (use `import { X } from '@/types/dashboard'`)
+
+**TypeScript:** Strict mode enabled with `noUncheckedIndexedAccess` - array access returns `T | undefined`
 
 ## Critical Rules (NO EXCEPTIONS)
 
@@ -93,7 +97,15 @@ When given vague prompts:
 **Typography:** Labels=`text-sm text-gray-500`, Content=`text-base text-gray-900`
 **Hover:** Always add `hover:*` with `transition-*`
 
-## Workshop Context
+---
 
-Demonstrates zero config (inconsistent, ~55/100) vs full config (production-ready, ~95/100).
-Same vague prompt, same evaluation, 40-point difference.
+## Workshop Demo Context
+
+This project is a workshop demo showcasing AI configuration impact. The strict conventions above are intentional - they demonstrate how AI performs with clear guidance vs without.
+
+When using this codebase for the workshop:
+- Zero config typically scores ~55/100 on evaluations
+- Full config (with CLAUDE.md + skills) typically scores ~95/100
+- Same vague prompt, same evaluation rubric, 40-point difference
+
+For actual development (not demo): remove or adapt the "Scoring High" section above.

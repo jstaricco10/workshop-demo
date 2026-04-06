@@ -30,9 +30,6 @@ rm -rf _versions 2>/dev/null || true  # Remove versions to keep it clean
 # Set port to 3001
 sed -i '' 's/port: 3003/port: 3001/' vite.config.ts
 npm install > /dev/null 2>&1
-git init > /dev/null 2>&1
-git add . > /dev/null 2>&1
-git commit -m "zero config version" > /dev/null 2>&1
 echo "  ✅ zero-config ready (port 3001)"
 
 # Full Stack (Skills + Rules + Commands)
@@ -54,9 +51,6 @@ rm -rf _versions 2>/dev/null || true  # Remove versions to keep it clean
 # Set port to 3004
 sed -i '' 's/port: 3003/port: 3004/' vite.config.ts
 npm install > /dev/null 2>&1
-git init > /dev/null 2>&1
-git add . > /dev/null 2>&1
-git commit -m "full stack with skills" > /dev/null 2>&1
 echo "  ✅ full-stack ready (port 3004)"
 
 cd "$PARENT_DIR"
@@ -74,9 +68,6 @@ echo "  2. In each tab:"
 echo "     Tab 1: cd $PARENT_DIR/workshop-demo-zero-config"
 echo "     Tab 2: cd $PARENT_DIR/workshop-demo-full-stack"
 echo "  3. Start your presentation!"
-echo ""
-echo "💡 To reset a demo:"
-echo "     git checkout . && git clean -fd"
 echo ""
 echo "🎬 Presentation flow:"
 echo "  1. Zero Config - point out problems"

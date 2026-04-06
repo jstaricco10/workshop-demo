@@ -38,10 +38,10 @@ ls -la | grep -E '(cursor|claude|CLAUDE)'  # Should be empty
 
 ### Show problems:
 ```bash
-git status
+ls -la src/components/
+ls -la src/types/
 cat src/components/DeploymentHistory.tsx
 cat src/types/dashboard.ts 2>/dev/null || echo "No types!"
-git diff src/
 ```
 
 **Point out:**
@@ -50,11 +50,6 @@ git diff src/
 - ❌ Missing types file
 - ❌ `any` types
 - ❌ Wrong colors
-
-### Reset:
-```bash
-git checkout . && git clean -fd
-```
 
 ---
 
@@ -75,10 +70,10 @@ ls .claude/skills/
 
 ### Show perfection:
 ```bash
-git status
+ls -la src/components/
+ls -la src/types/
 cat src/types/dashboard.ts
 cat src/components/DeploymentHistory.tsx
-git diff --stat
 ```
 
 **Point out:**
@@ -119,18 +114,13 @@ npm run dev  # http://localhost:3004
 ## Emergency Commands
 
 ```bash
-# Reset a demo
-git checkout . && git clean -fd
-
 # Kill a port
 lsof -ti:3001 | xargs kill -9
 lsof -ti:3004 | xargs kill -9
 
-# Check git status
-git status
-
-# See what was generated
-git diff --stat
+# List generated files
+ls -la src/components/
+ls -la src/types/
 ```
 
 ---
@@ -148,7 +138,5 @@ git diff --stat
 ## Backup Plan
 If live demo fails:
 - Show pre-recorded video
-- Show pre-generated diffs
+- Show screenshots
 - Explain what should happen
-
-Have `backup-v1.diff` and `backup-v4.diff` ready!

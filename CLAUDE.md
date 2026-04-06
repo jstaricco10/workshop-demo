@@ -110,12 +110,10 @@ import type { DevMetric } from '@/types/dashboard'
 
 ## Workshop Demo Context
 
-This project exists in four configuration versions (in `_versions/`):
-1. **v1-zero-config**: No AI configuration (demonstrates inconsistent output)
-2. **v2-rules-only**: `.cursorrules` file (demonstrates improved consistency)
-3. **v3-full-setup**: Full setup with modular rules + commands (demonstrates guided workflows)
-4. **v4-skills**: Claude Code skills for intelligent, autonomous execution (demonstrates AI automation)
+This project demonstrates the power of AI configuration by comparing two versions:
+1. **Zero Config**: No AI configuration (demonstrates inconsistent, unpredictable output)
+2. **Full Stack**: CLAUDE.md + Skills (demonstrates autonomous, production-ready code generation)
 
-The same prompt is used across all versions to show the evolution from unpredictable → consistent → guided → autonomous.
+The same prompt is used in both versions to show the dramatic difference configuration makes.
 
-**For presentations:** Most impactful is comparing V1 (zero config) vs V4 (full stack) to show dramatic contrast. See `PRESENTATION-SIMPLE.md` for the streamlined 25-minute demo format.
+**For presentations:** See `PRESENTATION-SIMPLE.md` for the complete 25-minute demo guide and `QUICK-REFERENCE-SIMPLE.md` as your cheat sheet during the talk.

@@ -97,7 +97,8 @@ cat CLAUDE.md
 **When it finishes:**
 ```bash
 # Show what was generated
-git status
+ls -la src/components/
+ls -la src/types/
 
 # Show the code
 cat src/components/DeploymentHistory.tsx  # or whatever it created
@@ -115,12 +116,6 @@ cat src/data/mockData.ts
 - ❌ **File structure** doesn't follow conventions
 - ❌ **No workflow** - random order
 
-**Show the diff:**
-```bash
-git diff src/
-git diff --stat
-```
-
 **Optional - run it to show visually:**
 ```bash
 npm run dev  # http://localhost:3001
@@ -132,11 +127,6 @@ Show in browser: "Funciona... pero mira el código."
 > "Funciona, pero este código no pasaría code review.
 > No sigue nuestros patrones.
 > En un equipo real, esto vuelve al developer para correcciones."
-
-**Reset:**
-```bash
-git checkout . && git clean -fd
-```
 
 ---
 
@@ -191,7 +181,8 @@ Simply run:
 **When done:**
 ```bash
 # Show what was generated
-git status
+ls -la src/components/
+ls -la src/types/
 
 # Show the code - READ IT ALOUD
 cat src/types/dashboard.ts
@@ -214,12 +205,6 @@ cat src/components/DeploymentHistory.tsx | head -40
 - ✅ **Workflow order** - Types → Data → Components → Integration
 - ✅ **Auto-reviewed** - quality gate passed
 
-**Show the diff:**
-```bash
-git diff --stat
-git diff src/
-```
-
 **Run it to show visually:**
 ```bash
 npm run dev  # http://localhost:3004
@@ -239,21 +224,13 @@ Open browser:
 - Zero Config: http://localhost:3001 (after you re-ran with generated code)
 - Full Stack: http://localhost:3004
 
-**Show code side by side** (split screen or switch quickly):
+**Show code side by side** (split screen or switch quickly) by opening both in your editor or using `cat` to show them in terminals.
 
-**Zero Config Component:**
-```bash
-# Tab 1
-cat src/components/DeploymentHistory.tsx
-```
-
-**Full Stack Component:**
-```bash
-# Tab 2
-cat src/components/DeploymentHistory.tsx
-```
-
-**Point out specific differences in code quality.**
+**Point out specific differences in code quality:**
+- Exports (default vs named)
+- Type definitions (inline vs centralized)
+- Styling approach (mixed vs Tailwind)
+- Component reusability
 
 **Show the comparison table:**
 
@@ -342,23 +319,10 @@ cat src/components/DeploymentHistory.tsx
 
 ## 🚨 Emergency Backup
 
-If live demos fail, pre-generate perfect examples:
-
-```bash
-# Before presentation, run the full demos
-# Save the diffs
-cd workshop-demo-zero-config
-# (run demo)
-git diff > ../backup-zero-config.diff
-
-cd workshop-demo-full-stack
-# (run demo)
-git diff > ../backup-full-stack.diff
-
-# Can show these diffs if live demo fails
-```
-
-Also record a video of V4 in action as ultimate backup.
+If live demos fail:
+- Have screenshots of the generated code ready
+- Record a video of the full-stack demo as ultimate backup
+- Have example files pre-saved to show the difference
 
 ---
 
@@ -387,11 +351,6 @@ Share:
 When V4 finishes generating and you show the code:
 
 **Pause for effect.**
-
-Show the diff stats:
-```bash
-git diff --stat
-```
 
 Show the perfect code:
 ```bash

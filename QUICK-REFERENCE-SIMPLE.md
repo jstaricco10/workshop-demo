@@ -12,31 +12,57 @@ Tab 1: cd ~/Desktop/workshop-demo-zero-config  # Port 3001
 Tab 2: cd ~/Desktop/workshop-demo-full-stack   # Port 3004
 ```
 
-## The Prompt
+## Prompt 1 - Implementation
 ```
-Add a new "Deployment History" section to the dashboard that shows:
-- A timeline of the last 10 deployments
-- Each deployment shows: environment (prod/staging), status (success/failed/rolled-back), deployer name, timestamp, and commit hash
-- Failed deployments should be visually distinct
-- Add a "Deploy Frequency" stat card to the existing metrics row
-- Use the same component patterns and styling as the existing codebase
+Improve the dashboard to better reflect deployment activity and reliability.
 ```
+
+**One sentence. Ultra-vague. Forces all decisions.**
 
 ---
 
-## Zero Config Demo (8-10 min)
+## Prompt 2 - Evaluation
+```
+Do not make any changes, I just want to evaluate your changes.
+
+Look for:
+- Code quality and consistency with the existing codebase
+- Reuse of existing components, patterns, and utilities
+- Introduction of unnecessary abstractions or duplication
+- Naming conventions and clarity
+- Separation of concerns (UI, logic, data)
+- Scalability and extensibility of the solution
+- Handling of edge cases (e.g., failed or missing data)
+- Visual and UX consistency with the rest of the dashboard
+- Complexity vs simplicity trade-offs
+
+For each point:
+- Explain what was done well
+- Point out any issues or questionable decisions
+- Highlight differences from typical best practices
+
+Finally:
+- Give an overall assessment of the implementation quality with a score /100
+- Mention what a more senior/production-ready solution would improve
+```
+
+**Same evaluation for both. Watch the score difference.**
+
+---
+
+## Zero Config Demo (10-12 min)
 
 ### Check config:
 ```bash
 ls -la | grep -E '(cursor|claude|CLAUDE)'  # Should be empty
 ```
 
-### Run demo:
-- Paste prompt in AI
+### Run Prompt 1:
+- Paste implementation prompt
 - Wait for generation
 - ⏱️ Time it
 
-### Show problems:
+### Show code:
 ```bash
 ls -la src/components/
 ls -la src/types/
@@ -44,16 +70,21 @@ cat src/components/DeploymentHistory.tsx
 cat src/types/dashboard.ts 2>/dev/null || echo "No types!"
 ```
 
-**Point out:**
+### Run Prompt 2 (Evaluation):
+- Paste evaluation prompt
+- Watch the analysis
+- **Note the score: ~45-65/100**
+
+**Point out issues:**
+- ❌ Custom metric displays
+- ❌ Wrong colors (green-500, teal, etc.)
+- ❌ Inline types or missing
 - ❌ Default exports
-- ❌ Inline styles
-- ❌ Missing types file
-- ❌ `any` types
-- ❌ Wrong colors
+- ❌ No analysis beforehand
 
 ---
 
-## Full Stack Demo (10-12 min) ⭐
+## Full Stack Demo (12-15 min) ⭐
 
 ### Show config:
 ```bash
@@ -61,14 +92,14 @@ head -30 CLAUDE.md
 ls .claude/skills/
 ```
 
-### Run demo:
+### Run /workshop:
 ```
 /workshop
 ```
 
 **That's it!** ☕ Narrate while it runs.
 
-### Show perfection:
+### Show code:
 ```bash
 ls -la src/components/
 ls -la src/types/
@@ -76,38 +107,55 @@ cat src/types/dashboard.ts
 cat src/components/DeploymentHistory.tsx
 ```
 
-**Point out:**
+### Run Prompt 2 (Evaluation):
+- Paste same evaluation prompt
+- Watch the analysis
+- **Note the score: ~90-98/100**
+
+**Point out excellence:**
+- ✅ Analyzed codebase first
+- ✅ Reuses MetricCard perfectly
+- ✅ Correct palette ONLY
+- ✅ Types centralized
 - ✅ Named exports
-- ✅ Types in right place
-- ✅ Tailwind + palette
-- ✅ Props interface
-- ✅ Reuses MetricCard
-- ✅ Auto-reviewed
+- ✅ Production-ready
 
 ### Show it working:
 ```bash
-npm run dev  # http://localhost:3004
+yarn dev  # http://localhost:3004
 ```
 
 ---
 
-## Side-by-Side (5 min)
+## The Score Reveal (5 min) 🎯
 
-**Both running:**
+**Show the scores:**
+```
+Zero Config:  55/100 ⚠️
+Full Stack:   95/100 ✅
+
+Difference: 40 points
+```
+
+**Show both running:**
 - Zero Config: http://localhost:3001
 - Full Stack: http://localhost:3004
 
-**Show code diffs side by side**
+**Visual may look similar, but CODE quality is night and day.**
 
 ---
 
-## The Message
+## The Message 🎤
 
-> "Mismo prompt. Dos resultados.
+> "Mismo prompt. Misma evaluación.
 >
-> La diferencia es la configuración.
+> 55/100 vs 95/100
+> Junior vs Senior
+> Needs rework vs Production-ready
 >
-> CLAUDE.md + Skills = Autonomous teammate"
+> La diferencia es la CONFIGURACIÓN.
+>
+> CLAUDE.md + Skills = Senior AI Teammate"
 
 ---
 
@@ -127,11 +175,11 @@ ls -la src/types/
 
 ## Timing
 - Intro: 3 min
-- Zero Config: 8-10 min
-- Full Stack: 10-12 min ⭐
-- Compare: 5 min
-- Wrap: 2 min
-- **Total: 28-32 min**
+- Zero Config: 10-12 min (implementation + evaluation)
+- Full Stack: 12-15 min (implementation + evaluation) ⭐
+- Score Reveal: 5 min
+- Wrap: 3 min
+- **Total: 33-38 min**
 
 ---
 

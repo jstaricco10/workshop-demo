@@ -1,119 +1,99 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Workshop demo React dashboard showcasing AI configuration impact.
 
-## Project Overview
+## Commands
 
-Workshop demo React dashboard that demonstrates the impact of AI configuration levels (zero config → rules only → full setup with commands). The codebase follows strict conventions to highlight how AI assistants can better follow project patterns when properly configured.
-
-## Development Commands
-
-```bash
-yarn install         # Install dependencies
-yarn dev             # Start dev server (http://localhost:3003)
-yarn build           # Type-check and build for production
-yarn preview         # Preview production build
-```
+**Use `yarn` (NOT npm):**
+- `yarn install` - Install dependencies
+- `yarn dev` - Start dev server (http://localhost:3003)
+- `yarn build` - Build for production
 
 ## Tech Stack
 
-- **React 18** with functional components and hooks
-- **TypeScript** (strict mode with `noUncheckedIndexedAccess`)
-- **Vite** for build tooling
-- **Tailwind CSS** for styling (no inline styles, no CSS modules)
-- **Recharts** for data visualization
-- **Lucide React** for icons
+React 18 + TypeScript (strict) + Vite + Tailwind CSS + Recharts + Lucide React
 
-## Architecture & File Organization
+## File Structure
 
-### Directory Structure
 ```
 src/
-  types/dashboard.ts      # All TypeScript interfaces
-  data/mockData.ts        # Mock data, typed and exported
+  types/dashboard.ts      # ALL interfaces here
+  data/mockData.ts        # ALL mock data here
   components/             # One component per file
   App.tsx                 # Main layout
 ```
 
-### Component Patterns
+## Critical Rules (NO EXCEPTIONS)
 
-**Named exports only** — never use default exports:
-```tsx
-export function ComponentName({ prop }: ComponentNameProps) { }
-```
+### Exports & Types
+- ❌ NEVER default exports → ✅ Always `export function ComponentName()`
+- ❌ NEVER inline types → ✅ All interfaces in `src/types/dashboard.ts`
+- ❌ NEVER `any` types → ✅ Strict TypeScript always
+- ✅ Props interface required: `ComponentNameProps`
 
-**Props interfaces** — every component must define its props interface:
-```tsx
-interface ComponentNameProps {
-  data: SomeType
-}
-```
+### Data Flow
+- ❌ NEVER import data in components → ✅ Import ONLY in `App.tsx`, pass via props
+- ✅ Components are pure UI receiving props
 
-**Data flow** — components receive all data via props. Never import data directly inside components. Data imports happen in `App.tsx` and are passed down.
+### Styling
+- ❌ NEVER inline styles, CSS modules, styled-components
+- ✅ Tailwind utilities EXCLUSIVELY
+- ✅ Project colors ONLY: `blue-50/500/600`, `emerald-500/600`, `red-500`, `gray-50/100/400/500/900`
+- ❌ NEVER: green-*, teal-*, purple-*, etc.
+- ✅ Cards: `rounded-xl shadow-sm hover:shadow-md transition-shadow p-6`
+- ✅ Icons: Import individually from `lucide-react` (not `import *`)
 
-**Component size** — keep under 80 lines. Extract sub-components if longer.
+### Components
+- ✅ Under 80 lines (extract if longer)
+- ✅ For metrics: REUSE `MetricCard` component (NEVER create custom metric displays)
 
-### TypeScript Standards
+## Decision Framework for Vague Requirements
 
-- **Strict mode**: No `any` types ever
-- **Type imports**: Use `import type { X }` for type-only imports
-- **Interfaces**: Define all data structures in `src/types/dashboard.ts`
-- **Array access**: Handle potential `undefined` (noUncheckedIndexedAccess is enabled)
-- Use `interface` for object shapes, `type` for unions/intersections
+When given vague prompts:
 
-### Styling Conventions
+1. **Analyze first** (15 min):
+   - Read `src/types/dashboard.ts`, `src/data/mockData.ts`
+   - Read `src/components/MetricCard.tsx` - can you reuse it?
+   - Read other components for patterns
+   - Read `App.tsx` for layout structure
 
-**Tailwind utility classes exclusively**:
-- Cards: `rounded-xl` with `shadow-sm`, `hover:shadow-md` for interactive elements
-- Inner elements: `rounded-lg`
-- Avatars: `rounded-full`
-- Spacing: Prefer `gap-*` utilities over margins between siblings
-- Transitions: Always add `transition-*` classes for hover/state changes
+2. **Interpret requirement**:
+   - Example: "deployment activity" → deployment history/timeline
+   - Example: "reliability" → success rate metrics
 
-**Color Palette** (use these exact shades):
-- Primary: `blue-50`, `blue-500`, `blue-600`
-- Success/positive: `emerald-500`, `emerald-600`
-- Error/negative: `red-500`
-- Neutrals: `gray-50`, `gray-100`, `gray-400`, `gray-500`, `gray-900`
+3. **Plan & explain BEFORE coding**:
+   - What features you'll add and why
+   - Visualization choice (timeline/list/cards) based on existing patterns
+   - Component reuse strategy
+   - Why choices fit codebase
 
-**Icons**: Import individually from `lucide-react`, not `import * as`
+4. **Implement**: Types → Data → Components → Integration
 
-## Workflow: Adding Dashboard Features
+5. **Validate**: Run `yarn build`
 
-When adding new features, follow this exact sequence:
+## Scoring High (90-100/100)
 
-### 1. Types First
-Create or extend interfaces in `src/types/dashboard.ts` for new data structures.
+**Must-haves (critical):**
+- Named exports, types centralized, data centralized
+- Tailwind only with project colors only
+- Data via props, no `any`, under 80 lines
+- Reuse MetricCard for metrics
 
-### 2. Mock Data
-Add realistic mock data in `src/data/mockData.ts`, using the types from step 1. Export as named constants.
+**Common mistakes (-points):**
+- Custom metric display: -10
+- Wrong colors (green/teal/purple): -5 to -8
+- Inline styles: -8
+- Default exports: -5
+- Data in components: -8
 
-### 3. Components
-Create components in `src/components/`:
-- One file per component, PascalCase filename
-- Named export with `ComponentNameProps` interface
-- Follow Tailwind patterns and color palette
-- If adding a metric stat, reuse the existing `MetricCard` component
+## Patterns
 
-### 4. Integration
-Wire into `App.tsx`:
-- Import component and data
-- Add to layout grid following existing patterns
-- New sections typically go below existing ones
+**Spacing:** `gap-4`, `space-y-4`, `p-6`, `mb-8`
+**Status colors:** Success=`emerald-500`, Fail=`red-500`, Neutral=`gray-100`
+**Typography:** Labels=`text-sm text-gray-500`, Content=`text-base text-gray-900`
+**Hover:** Always add `hover:*` with `transition-*`
 
-## Path Aliases
+## Workshop Context
 
-TypeScript is configured with `@/*` alias mapping to `src/*`:
-```tsx
-import type { DevMetric } from '@/types/dashboard'
-```
-
-## Workshop Demo Context
-
-This project demonstrates the power of AI configuration by comparing two versions:
-1. **Zero Config**: No AI configuration (demonstrates inconsistent, unpredictable output)
-2. **Full Stack**: CLAUDE.md + Skills (demonstrates autonomous, production-ready code generation)
-
-The same prompt is used in both versions to show the dramatic difference configuration makes.
-
-**For presentations:** See `PRESENTATION-SIMPLE.md` for the complete 25-minute demo guide and `QUICK-REFERENCE-SIMPLE.md` as your cheat sheet during the talk.
+Demonstrates zero config (inconsistent, ~55/100) vs full config (production-ready, ~95/100).
+Same vague prompt, same evaluation, 40-point difference.

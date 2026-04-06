@@ -1,156 +1,99 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Workshop demo React dashboard showcasing AI configuration impact.
 
-## Project Overview
+## Commands
 
-Workshop demo React dashboard (v4-skills version) demonstrating the power of AI skills for autonomous, intelligent development workflows. This version showcases how skills can automate complex multi-step processes while maintaining strict quality standards.
-
-## Development Commands
-
-```bash
-npm install          # Install dependencies
-npm run dev          # Start dev server (http://localhost:3003)
-npm run build        # Type-check and build for production
-npm run preview      # Preview production build
-```
-
-## Available Skills
-
-### `/feature` - Add Dashboard Feature
-Guides you through adding a new dashboard feature following the strict workflow:
-**Types → Data → Components → Integration**
-
-Automatically:
-- Creates TypeScript interfaces
-- Generates mock data
-- Builds components following patterns
-- Integrates into App.tsx
-- Verifies quality standards
-
-### `/review` - Code Quality Review
-Analyzes code against project standards and offers automatic fixes:
-- TypeScript compliance (no `any`, proper interfaces)
-- Component patterns (named exports, under 80 lines)
-- Styling standards (Tailwind, color palette)
-- Architecture compliance (data flow, file organization)
-
-Can auto-fix issues with user approval.
-
-### `/demo-reset` - Reset to Base State
-Resets project to clean state for workshop demonstrations:
-- Discards uncommitted changes
-- Removes untracked files
-- Verifies clean working tree
-- Optional dev server restart
-
-Perfect for running multiple demos.
-
-### `/workshop` - Full Demo Runner
-Executes the complete workshop demo end-to-end:
-- Runs the standard workshop prompt automatically
-- Adds "Deployment History" feature
-- Creates all necessary types, data, components
-- Integrates everything
-- Auto-reviews the code
-- Shows complete summary
-
-**This is the killer feature** - fully autonomous execution while maintaining perfect quality.
+**Use `yarn` (NOT npm):**
+- `yarn install` - Install dependencies
+- `yarn dev` - Start dev server (http://localhost:3003)
+- `yarn build` - Build for production
 
 ## Tech Stack
 
-- **React 18** with functional components and hooks
-- **TypeScript** (strict mode with `noUncheckedIndexedAccess`)
-- **Vite** for build tooling
-- **Tailwind CSS** for styling (no inline styles, no CSS modules)
-- **Recharts** for data visualization
-- **Lucide React** for icons
+React 18 + TypeScript (strict) + Vite + Tailwind CSS + Recharts + Lucide React
 
-## Architecture & File Organization
+## File Structure
 
-### Directory Structure
 ```
 src/
-  types/dashboard.ts      # All TypeScript interfaces
-  data/mockData.ts        # Mock data, typed and exported
+  types/dashboard.ts      # ALL interfaces here
+  data/mockData.ts        # ALL mock data here
   components/             # One component per file
   App.tsx                 # Main layout
 ```
 
-### Component Patterns
+## Critical Rules (NO EXCEPTIONS)
 
-**Named exports only** — never use default exports:
-```tsx
-export function ComponentName({ prop }: ComponentNameProps) { }
-```
+### Exports & Types
+- ❌ NEVER default exports → ✅ Always `export function ComponentName()`
+- ❌ NEVER inline types → ✅ All interfaces in `src/types/dashboard.ts`
+- ❌ NEVER `any` types → ✅ Strict TypeScript always
+- ✅ Props interface required: `ComponentNameProps`
 
-**Props interfaces** — every component must define its props interface:
-```tsx
-interface ComponentNameProps {
-  data: SomeType
-}
-```
+### Data Flow
+- ❌ NEVER import data in components → ✅ Import ONLY in `App.tsx`, pass via props
+- ✅ Components are pure UI receiving props
 
-**Data flow** — components receive all data via props. Never import data directly inside components.
+### Styling
+- ❌ NEVER inline styles, CSS modules, styled-components
+- ✅ Tailwind utilities EXCLUSIVELY
+- ✅ Project colors ONLY: `blue-50/500/600`, `emerald-500/600`, `red-500`, `gray-50/100/400/500/900`
+- ❌ NEVER: green-*, teal-*, purple-*, etc.
+- ✅ Cards: `rounded-xl shadow-sm hover:shadow-md transition-shadow p-6`
+- ✅ Icons: Import individually from `lucide-react` (not `import *`)
 
-**Component size** — keep under 80 lines. Extract sub-components if longer.
+### Components
+- ✅ Under 80 lines (extract if longer)
+- ✅ For metrics: REUSE `MetricCard` component (NEVER create custom metric displays)
 
-### TypeScript Standards
+## Decision Framework for Vague Requirements
 
-- **Strict mode**: No `any` types ever
-- **Type imports**: Use `import type { X }` for type-only imports
-- **Interfaces**: Define all data structures in `src/types/dashboard.ts`
-- **Array access**: Handle potential `undefined` (noUncheckedIndexedAccess is enabled)
+When given vague prompts:
 
-### Styling Conventions
+1. **Analyze first** (15 min):
+   - Read `src/types/dashboard.ts`, `src/data/mockData.ts`
+   - Read `src/components/MetricCard.tsx` - can you reuse it?
+   - Read other components for patterns
+   - Read `App.tsx` for layout structure
 
-**Tailwind utility classes exclusively**:
-- Cards: `rounded-xl` with `shadow-sm`, `hover:shadow-md` for interactive elements
-- Inner elements: `rounded-lg`
-- Avatars: `rounded-full`
-- Spacing: Prefer `gap-*` utilities over margins between siblings
-- Transitions: Always add `transition-*` classes for hover/state changes
+2. **Interpret requirement**:
+   - Example: "deployment activity" → deployment history/timeline
+   - Example: "reliability" → success rate metrics
 
-**Color Palette** (use these exact shades):
-- Primary: `blue-50`, `blue-500`, `blue-600`
-- Success/positive: `emerald-500`, `emerald-600`
-- Error/negative: `red-500`
-- Neutrals: `gray-50`, `gray-100`, `gray-400`, `gray-500`, `gray-900`
+3. **Plan & explain BEFORE coding**:
+   - What features you'll add and why
+   - Visualization choice (timeline/list/cards) based on existing patterns
+   - Component reuse strategy
+   - Why choices fit codebase
 
-**Icons**: Import individually from `lucide-react`, not `import * as`
+4. **Implement**: Types → Data → Components → Integration
 
-## Path Aliases
+5. **Validate**: Run `yarn build`
 
-TypeScript is configured with `@/*` alias mapping to `src/*`:
-```tsx
-import type { DevMetric } from '@/types/dashboard'
-```
+## Scoring High (90-100/100)
 
-## V4 Skills Advantage
+**Must-haves (critical):**
+- Named exports, types centralized, data centralized
+- Tailwind only with project colors only
+- Data via props, no `any`, under 80 lines
+- Reuse MetricCard for metrics
 
-This version demonstrates the evolution from basic configuration to intelligent automation:
+**Common mistakes (-points):**
+- Custom metric display: -10
+- Wrong colors (green/teal/purple): -5 to -8
+- Inline styles: -8
+- Default exports: -5
+- Data in components: -8
 
-| Capability | v1 Zero Config | v2 Rules | v3 Commands | v4 Skills |
-|------------|---------------|----------|-------------|-----------|
-| Consistency | ❌ Unpredictable | ✅ Reliable | ✅ Reliable | ✅ Reliable |
-| Workflow Guidance | ❌ None | ⚠️ Implicit | ✅ Step-by-step | ✅✅ Automated |
-| Quality Checks | ❌ None | ⚠️ Manual | ✅ Checklist | ✅✅ Auto-review |
-| User Intervention | ❌ Constant | ⚠️ Frequent | ⚠️ Each step | ✅ Minimal |
-| Intelligence | ❌ Basic | ⚠️ Pattern-matching | ✅ Guided | ✅✅ Autonomous |
+## Patterns
 
-Skills can:
-- Execute complex multi-step workflows automatically
-- Make intelligent decisions based on context
-- Self-validate and auto-correct
-- Chain multiple operations together
-- Provide rich, interactive feedback
+**Spacing:** `gap-4`, `space-y-4`, `p-6`, `mb-8`
+**Status colors:** Success=`emerald-500`, Fail=`red-500`, Neutral=`gray-100`
+**Typography:** Labels=`text-sm text-gray-500`, Content=`text-base text-gray-900`
+**Hover:** Always add `hover:*` with `transition-*`
 
-## Workshop Demo Context
+## Workshop Context
 
-This is the v4-skills version showing the pinnacle of AI configuration. Compare this with:
-- **v1-zero-config**: No configuration
-- **v2-rules-only**: Basic `.cursorrules`
-- **v3-full-setup**: Commands + modular rules
-- **v4-skills**: Intelligent, autonomous skills
-
-Run `/workshop` to see the full power of automated feature development with built-in quality assurance.
+Demonstrates zero config (inconsistent, ~55/100) vs full config (production-ready, ~95/100).
+Same vague prompt, same evaluation, 40-point difference.

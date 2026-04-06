@@ -59,16 +59,51 @@ See [`QUICK-REFERENCE-SIMPLE.md`](./QUICK-REFERENCE-SIMPLE.md) as your cheat she
 
 ## 🎯 Workshop Demo Guide
 
-### The Prompt (same for all versions):
+### The Workshop Prompts
+
+**Prompt 1 - Implementation (ultra-vague):**
 
 ```
-Add a new "Deployment History" section to the dashboard that shows:
-- A timeline of the last 10 deployments
-- Each deployment shows: environment (prod/staging), status (success/failed/rolled-back), deployer name, timestamp, and commit hash
-- Failed deployments should be visually distinct
-- Add a "Deploy Frequency" stat card to the existing metrics row
-- Use the same component patterns and styling as the existing codebase
+Improve the dashboard to better reflect deployment activity and reliability.
 ```
+
+**That's it.** Intentionally ultra-vague. No guidance on what, how, or where.
+
+**Prompt 2 - Evaluation (comprehensive):**
+
+After implementation, evaluate with:
+
+```
+Do not make any changes, I just want to evaluate your changes.
+
+Look for:
+
+- Code quality and consistency with the existing codebase
+- Reuse of existing components, patterns, and utilities
+- Introduction of unnecessary abstractions or duplication
+- Naming conventions and clarity
+- Separation of concerns (UI, logic, data)
+- Scalability and extensibility of the solution
+- Handling of edge cases (e.g., failed or missing data)
+- Visual and UX consistency with the rest of the dashboard
+- Complexity vs simplicity trade-offs
+
+For each point:
+- Explain what was done well
+- Point out any issues or questionable decisions
+- Highlight differences from typical best practices
+
+Finally:
+- Give an overall assessment of the implementation quality with a score /100
+- Mention what a more senior/production-ready solution would improve
+```
+
+**The Strategy:**
+1. Ultra-vague implementation prompt forces many decisions
+2. Rigorous evaluation reveals quality differences
+3. Zero config: typically scores 45-65/100
+4. Full stack: typically scores 90-98/100
+5. The score difference makes the impact undeniable
 
 ### Version 1: Zero Config
 In `workshop-demo-zero-config/`:

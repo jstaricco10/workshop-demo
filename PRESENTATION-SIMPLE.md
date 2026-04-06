@@ -55,18 +55,68 @@ Show the browser: "Este es nuestro dashboard. Vamos a agregar una feature de Dep
 
 Ctrl+C to stop.
 
-**Show the prompt:**
+**Show Prompt 1 (Implementation):**
 ```
-Add a new "Deployment History" section to the dashboard that shows:
-- A timeline of the last 10 deployments
-- Each deployment shows: environment (prod/staging), status (success/failed/rolled-back),
-  deployer name, timestamp, and commit hash
-- Failed deployments should be visually distinct
-- Add a "Deploy Frequency" stat card to the existing metrics row
-- Use the same component patterns and styling as the existing codebase
+Improve the dashboard to better reflect deployment activity and reliability.
 ```
 
-Copy this - you'll use it twice.
+**That's it. One sentence. Ultra-vague.**
+
+Copy this - you'll use it in both demos.
+
+**Key point to emphasize:** 
+> "Miren este prompt. Una sola frase.
+> 
+> No dice QUÉ agregar.
+> No dice CÓMO implementarlo.
+> No dice DÓNDE ubicarlo.
+> 
+> Claude tiene que decidir TODO:
+> - ¿Qué features agregar?
+> - ¿Qué visualización usar?
+> - ¿Qué componentes crear o reutilizar?
+> - ¿Qué colores usar?
+> - ¿Qué estructura de datos?
+> - ¿Exports, types, estilos?
+> 
+> Veremos qué tan diferentes son las decisiones
+> CON configuración vs SIN configuración."
+
+---
+
+**Prompt 2 (Evaluation) - Show this after implementation:**
+
+After both implementations finish, use this evaluation prompt:
+
+```
+Do not make any changes, I just want to evaluate your changes.
+
+Look for:
+- Code quality and consistency with the existing codebase
+- Reuse of existing components, patterns, and utilities
+- Introduction of unnecessary abstractions or duplication
+- Naming conventions and clarity
+- Separation of concerns (UI, logic, data)
+- Scalability and extensibility of the solution
+- Handling of edge cases (e.g., failed or missing data)
+- Visual and UX consistency with the rest of the dashboard
+- Complexity vs simplicity trade-offs
+
+For each point:
+- Explain what was done well
+- Point out any issues or questionable decisions
+- Highlight differences from typical best practices
+
+Finally:
+- Give an overall assessment of the implementation quality with a score /100
+- Mention what a more senior/production-ready solution would improve
+```
+
+**Key point:**
+> "Ahora vamos a evaluar ambas implementaciones con el MISMO criterio riguroso.
+> 
+> Este es el tipo de code review que harías en producción.
+> Vamos a ver los scores."
 
 ---
 
@@ -106,15 +156,18 @@ cat src/types/dashboard.ts 2>/dev/null || echo "No types file - inline types?"
 cat src/data/mockData.ts
 ```
 
-**🚨 Point out problems:**
+**🚨 Point out problems (these will be MORE obvious now with the vague prompt):**
 - ❌ **Default exports** instead of named
 - ❌ **Inline styles** or CSS modules instead of Tailwind
 - ❌ **Types inline** instead of in `src/types/`
 - ❌ **`any` types** or loose typing
-- ❌ **Random colors** instead of project palette
-- ❌ **Doesn't reuse** MetricCard
+- ❌ **Random colors** (green-500, teal-400, etc.) instead of project palette
+- ❌ **Doesn't reuse** MetricCard for metrics
+- ❌ **Creates custom metric display** instead of using existing pattern
+- ❌ **Inconsistent visualization choice** (might be table, might be cards, varies each run)
+- ❌ **No analysis or justification** - just starts coding
 - ❌ **File structure** doesn't follow conventions
-- ❌ **No workflow** - random order
+- ❌ **No workflow** - random order, possibly data in components
 
 **Optional - run it to show visually:**
 ```bash
@@ -123,10 +176,24 @@ yarn dev  # http://localhost:3001
 
 Show in browser: "Funciona... pero mira el código."
 
+**Evaluation:**
+Now paste Prompt 2 (evaluation) and let it analyze.
+
+Watch the score. Likely: **45-65/100**
+
+**Point out the issues it finds:**
+- Creates custom metric displays
+- Uses random colors
+- Inconsistent patterns
+- No analysis before coding
+- Etc.
+
 **Conclusion:**
-> "Funciona, pero este código no pasaría code review.
-> No sigue nuestros patrones.
-> En un equipo real, esto vuelve al developer para correcciones."
+> "Miren el score: 55/100.
+> 
+> Funciona, pero es código de junior developer.
+> No pasa code review.
+> En un equipo real, esto vuelve para correcciones."
 
 ---
 
@@ -192,18 +259,20 @@ echo "---"
 cat src/components/DeploymentHistory.tsx | head -40
 ```
 
-**✅ Point out perfection:**
-- ✅ **Named exports** - correcto
-- ✅ **Types in src/types/** - perfecto
-- ✅ **Mock data typed** - excelente
-- ✅ **Tailwind classes** - sin inline styles
-- ✅ **Correct color palette** - blue/emerald/red/gray
-- ✅ **Reuses MetricCard** - smart
-- ✅ **Props interface** - defined
-- ✅ **No `any` types** - strict
-- ✅ **Component under 80 lines** - clean
-- ✅ **Workflow order** - Types → Data → Components → Integration
-- ✅ **Auto-reviewed** - quality gate passed
+**✅ Point out perfection (emphasize the DECISIONS made correctly):**
+- ✅ **ANALYZED first** - read all relevant files before coding
+- ✅ **EXPLAINED decisions** - justified visualization choice (timeline), component reuse (MetricCard), etc.
+- ✅ **Named exports** - following convention exactly
+- ✅ **Types in src/types/** - all interfaces centralized
+- ✅ **Mock data typed** - proper exports in mockData.ts
+- ✅ **Tailwind classes ONLY** - zero inline styles
+- ✅ **Correct color palette** - ONLY blue-500, emerald-500, red-500, gray-X (no green, no teal, no other shades)
+- ✅ **Reuses MetricCard** - didn't create custom metric display
+- ✅ **Props interface** - ComponentNameProps pattern
+- ✅ **No `any` types** - strict TypeScript
+- ✅ **Component under 80 lines** - clean and focused
+- ✅ **Workflow order** - Analyze → Explain → Types → Data → Components → Integration → Build
+- ✅ **Consistent visualization** - same choice every time based on patterns
 
 **Run it to show visually:**
 ```bash
@@ -211,66 +280,136 @@ yarn dev  # http://localhost:3004
 ```
 
 Open browser:
-> "Y aquí está. Funcionando perfectamente.
-> Código production-ready.
-> Siguiendo todos nuestros estándares.
-> Generado autónomamente."
+> "Y aquí está. Funcionando perfectamente."
+
+**Evaluation:**
+Now paste Prompt 2 (evaluation) again.
+
+Watch the score. Likely: **90-98/100**
+
+**Point out what it praises:**
+- ✅ Analyzed codebase first
+- ✅ Reused MetricCard
+- ✅ Perfect color palette adherence
+- ✅ Clean separation of concerns
+- ✅ Excellent TypeScript
+- ✅ Production-ready
+
+**Conclusion:**
+> "Miren el score: 95/100.
+> 
+> Esto es código senior-level.
+> Production-ready, sin correcciones.
+> Pasa code review a la primera.
+> 
+> Y se generó SOLO, autónomamente."
 
 ---
 
-### Acto 4: Side-by-Side Comparison (3-5 min)
+### Acto 4: The Score Reveal (5-7 min) 🎯
 
-**Have both browsers open:**
-- Zero Config: http://localhost:3001 (after you re-ran with generated code)
+**This is the dramatic climax.**
+
+**Show the scores side by side:**
+
+```
+Zero Config:     55/100  ⚠️
+Full Stack:      95/100  ✅
+```
+
+**Let that sink in. Pause for effect.**
+
+> "Mismo prompt.
+> Misma evaluación.
+> 40 puntos de diferencia.
+> 
+> Esto no es suerte.
+> Esto es configuración."
+
+**Then show the comparison table:**
+
+| Evaluation Criteria | Zero Config | Full Stack |
+|-------------------|-------------|------------|
+| **Score** | 55/100 ⚠️ | 95/100 ✅ |
+| **Code Quality** | 7/15 | 15/15 |
+| **Component Reuse** | 5/15 | 15/15 |
+| **Abstractions** | 6/10 | 10/10 |
+| **Naming** | 7/10 | 10/10 |
+| **Separation of Concerns** | 7/15 | 15/15 |
+| **Scalability** | 6/10 | 10/10 |
+| **Edge Cases** | 3/5 | 5/5 |
+| **Visual/UX Consistency** | 7/15 | 15/15 |
+| **Complexity** | 3/5 | 5/5 |
+
+**Point out key differences:**
+- Zero Config: Creates custom metric displays, random colors, inline types
+- Full Stack: Reuses MetricCard, correct palette, centralized types
+
+**Show both implementations in browser side by side:**
+- Zero Config: http://localhost:3001
 - Full Stack: http://localhost:3004
 
-**Show code side by side** (split screen or switch quickly) by opening both in your editor or using `cat` to show them in terminals.
-
-**Point out specific differences in code quality:**
-- Exports (default vs named)
-- Type definitions (inline vs centralized)
-- Styling approach (mixed vs Tailwind)
-- Component reusability
-
-**Show the comparison table:**
-
-| Aspect | Zero Config | Full Stack |
-|--------|-----------------|-----------------|
-| **Exports** | ❌ Default | ✅ Named |
-| **Types** | ❌ Inline/missing | ✅ In src/types/ |
-| **Styling** | ❌ Mixed/inline | ✅ Tailwind + palette |
-| **Workflow** | ❌ Random | ✅ Automated & correct |
-| **Quality** | ❌ No validation | ✅ Auto-reviewed |
-| **Reusability** | ❌ Duplicates code | ✅ Reuses components |
-| **Time to production** | ⚠️ Needs fixes | ✅ Ready now |
-| **User intervention** | Constant corrections | One command |
+They may LOOK similar, but the CODE quality is night and day.
 
 ---
 
-### Acto 5: The Mic Drop (2 min)
+### Acto 5: The Mic Drop 🎤 (2-3 min)
+
+**Show the final slide:**
+
+```
+Zero Config:  55/100  ⚠️  Junior level, needs rework
+Full Stack:   95/100  ✅  Senior level, production-ready
+
+Same prompt. Same evaluation. 40-point difference.
+```
 
 **Key message:**
-> "Mismo prompt. Dos resultados completamente diferentes.
+> "Esto es lo que quiero que se lleven:
 >
-> Sin configuración: Funciona, pero requiere correcciones manuales.
-> Con configuración completa: Production-ready, sin intervención.
+> El prompt era UNA FRASE.
+> La evaluación fue IDÉNTICA.
+> Los scores: 55 vs 95.
 >
-> La diferencia no es el AI model - es la configuración.
+> Sin configuración:
+> - Junior-level code
+> - Adivina los patrones
+> - Requiere correcciones
+> - No pasa code review
+>
+> Con configuración:
+> - Senior-level code
+> - Sigue patrones exactos
+> - Production-ready
+> - Pasa code review a la primera
+>
+> **La diferencia NO es el modelo de AI.**
+> **La diferencia es la CONFIGURACIÓN.**
 >
 > Configuration isn't optional anymore.
-> It's the difference between:
-> - Un asistente que adivina
-> - Y un teammate que sabe
+> Es la diferencia entre:
+> - Un asistente que adivina (55/100)
+> - Un teammate senior que sabe (95/100)
 >
-> CLAUDE.md + Skills = Autonomous AI teammate"
+> CLAUDE.md + Skills = Autonomous Senior Developer"
 
 **Call to action:**
-> "Pueden empezar hoy:
-> 1. Agreguen un CLAUDE.md a su proyecto
-> 2. Definan sus convenciones y workflows
-> 3. Creen skills para tareas repetitivas
+> "Pueden empezar HOY:
+> 
+> 1. Creen un CLAUDE.md básico
+>    - Documenten sus convenciones
+>    - Definan su workflow
+>    - Especifiquen su tech stack
+> 
+> 2. Agreguen skills para tareas comunes
+>    - Features, reviews, tests
+> 
+> 3. Midan el impacto
+>    - Antes: code review tarda 30 min
+>    - Después: code review aprueba en 5 min
 >
-> El código completo está disponible.
+> El código completo del workshop está en GitHub.
+> 
 > ¿Preguntas?"
 
 ---
